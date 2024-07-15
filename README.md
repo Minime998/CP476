@@ -2,7 +2,7 @@
 
 ## Project Tasks
 - ### Frontend
-  - [ ] Implement login page hmtl and css
+  - [x] Implement login page hmtl and css
   - [ ] Implement dashboard html and css
   - [ ] Implement update page html and css
   - [ ] Implement search page html and css
