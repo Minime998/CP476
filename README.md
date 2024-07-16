@@ -3,13 +3,13 @@
 ## Project Tasks
 - ### Frontend
   - [x] Implement login page hmtl and css
-  - [ ] Implement dashboard html and css
-  - [ ] Implement update page html and css
-  - [ ] Implement search page html and css
-  - [ ] Implement delete page html and css
+  - [x] Implement dashboard html and css
+  - [x] Implement update page html and css
+  - [x] Implement search page html and css
+  - [x] Implement delete page html and css
 
 - ### Backend
-  - [ ] Implement login page php script
+  - [x] Implement login page php script
   - [ ] Implement search page php script 
-  - [ ] Implement delete page php script
-  - [ ] Implement update page php script
+  - [x] Implement delete page php script
+  - [x] Implement update page php script
