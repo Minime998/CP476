@@ -2,15 +2,29 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 50vh;
+  min-height: 60vh;
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .header h2 {
   margin: 10px;
+}
+
+.current-user {
+  background: #6c8ebf;
+  padding: 7px 7px;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  width: max-content;
+  align-self: center;
+  margin-bottom: 2rem;
 }
 
 .container {
@@ -24,9 +38,16 @@ body {
 }
 
 .options a {
+  display: block;
   color: #000000;
   width: 100%;
   height: 100%;
+}
+.option {
+  transition: all 0.3s;
+}
+.option:hover {
+  transform: scale(1.2);
 }
 
 .search-option,

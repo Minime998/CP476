@@ -11,18 +11,19 @@
 
 <body>
   <div class="container">
-    <a href="dashboard.php">Home</a>
-    <div class="search-form">
+    <button class="home-btn"><a href="dashboard.php">Home</a></button>
+    <div class="form-container">
       <h2>Search Inventory</h2>
-      <form action="" method="post">
-        <input type="text" name="product-name" placeholder="Product Name" />
-        <input type="submit" value="Search" />
+      <form action="" method="post" class="form">
+        <input type="text" class="input-field" name="product-name" placeholder="Product Name" required />
+        <input type="submit" class="submit-btn" value="Search" />
       </form>
     </div>
     <div class="search-results">
-      <h3>Search Results</h3>
+      <h3>Sample Search Results</h3>
       <?php
       # put all the php logic here for searching
+      session_start();
 
       $results = 5;
       #this is the table that will show all the search results

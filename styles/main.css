@@ -20,11 +20,117 @@ body {
   align-items: center;
   min-height: 100vh;
   font-family: sans-serif;
+  padding: 1rem;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  gap: 2rem;
+  /* align-items: center; */
+}
+
+.connection-error,
+.login-error {
+  color: red;
+  font-size: 1.2rem;
+}
+
+.home-btn {
+  background: #dae8fc;
+  border: 2px solid #6c8ebf;
+  padding: 5px 15px;
+  border-radius: 7px;
+  width: max-content;
+}
+
+.home-btn a {
+  color: #224371;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+input[type="text"],
+input[type="submit"],
+.failed-query,
+.successful-query {
+  padding: 5px 10px;
+  padding: 5px 10px;
+  width: 100%;
+}
+input {
+  font-size: 16px;
+  border-radius: 7px;
+}
+
+input[type="submit"] {
+  cursor: pointer;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1rem;
+  color: #000000;
+  min-width: 600px;
+  border-radius: 7px;
+}
+
+input:focus,
+button:focus {
+  outline: 2px solid #bcbcbc;
+}
+
+.query-results {
+  transition: all 0.2s;
+}
+
+input[type="submit"],
+.failed-query,
+.successful-query {
+  border-radius: 7px;
+}
+
+.successful-query {
+  border: 1px solid #82b366;
+  background: #82b36672;
+}
+
+.failed-query,
+.successful-query {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* Works on Chrome, Edge, and Safari */
+
+/* Target the scrollbar track */
+::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+/* Target the scrollbar handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #1a1919; /* Color of the thumb */
+  border-radius: 5px; /* Radius of the thumb */
+}
+
+/* Target the scrollbar track when the handle is hovered */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Color of the thumb on hover */
+}
+
+/* Target the scrollbar track when scrolling is happening */
+::-webkit-scrollbar-thumb:active {
+  background-color: #333; /* Color of the thumb when active (clicking/dragging) */
 }

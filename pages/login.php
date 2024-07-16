@@ -16,16 +16,16 @@
             <h2>InventoFlow</h2>
             <p>Please login to continue</p>
         </div>
-        <form action="" method="post">
-            <input type="text" name="username" placeholder="Username" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="submit" name="Login" value="Login" />
+        <form action="" method="post" class="form">
+            <input type="text" name="username" placeholder="Username" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="submit" class="submit-btn" name="Login" value="Login" />
         </form>
     </div>
 
 
     <?php
-    if (isset($_POST["submit"])) { //user has clicked the login button
+    if (isset($_POST["Login"])) { //user has clicked the login button
         //get user input
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -47,12 +47,17 @@
             $conn = new PDO($dsn, $username, $password);
             //turn on error exceptions
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // save database connection parametes in a session
+            $_SESSION['db_host'] = 'localhost';
+            $_SESSION['db_user'] = $username;
+            $_SESSION['db_pass'] = $password;
+            $_SESSION['db_name'] = 'cp476';
             echo "Connection successful.";
         } catch (PDOException $e) {
             error_log($e->getMessage());
             $error_msg = $e->getMessage();
-            echo "<br><p class='login-error'>$error_msg</p>";
-            exit("<p class='login-error'>Failed to connect to the database. Please contact the administrator.</p>");
+            echo "<br><p class='connection-error'>$error_msg</p>";
+            exit("<p class='connection-error'>Failed to connect to the database. Please contact the administrator.</p>");
         }
         //redirect user to dashboard
         header("location: ../pages/dashboard.php?status=loggedIn");

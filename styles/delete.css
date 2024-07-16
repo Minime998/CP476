@@ -1,0 +1,43 @@
+.form-container {
+  background: #dae8fc;
+  padding: 1rem;
+  color: #000000;
+  min-width: 600px;
+}
+
+form {
+  flex-direction: row;
+  gap: 1rem;
+}
+
+input[type="text"],
+.form-container {
+  border: 2px solid #6c8ebf;
+  border-radius: 7px;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="submit"],
+.failed-query,
+.successful-query {
+  padding: 5px 10px;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+input[type="submit"],
+.failed-query {
+  background: #ffcccc;
+  border: 2px solid #f19c99;
+}
+
+input[type="submit"],
+.failed-query,
+.successful-query {
+  border-radius: 7px;
+}
+
+input[type="submit"] {
+  width: 50%;
+}

@@ -29,6 +29,7 @@ form {
   min-height: 300px;
   gap: 2rem;
   background: #00000035;
+  align-items: center;
 }
 
 .header {
@@ -73,9 +74,4 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
   background: #82b366ae;
-}
-
-.login-error {
-  color: red;
-  font-size: 1.2rem;
 }
