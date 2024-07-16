@@ -20,25 +20,47 @@
                 <input type="text" name="quantity" placeholder="Quantity" />
                 <input type="text" name="price" placeholder="Price" />
                 <input type="text" name="status" placeholder="Status" />
-                <input type="submit" value="Update" />
+                <input type="submit" name="submit" value="Update" />
             </form>
         </div>
         <div class="update-results">
             <h3>Message</h3>
             <?php
             # put all the php logic here for updating a product
+            if (isset($_POST["submit"])) { //executes if user hits update button
+                $id = $_POST["item_ID"];
+                $product_name = $_POST["product_name"];
+                $quantity = $_POST["quantity"];
+                $price = $_POST["price"];
+                $status = $_POST["status"];
+                $query = "UPDATE product SET ";
 
-            # variable $result will be whatever PDO return on update query
-            $results = 'successful';
-
-            if ($results == 'successful') {
-                echo " <div class='successful-update>
-                    <p> Successfully updated product </p>                 
-                </div>";
-            } else {
-                echo "<div class='failed-update>
-                    <p> Failed to update product. Product not found </p>                 
-                </div>";
+                //reused from delete, TO BE EDITED
+                $statement = conn->prepare($query);
+                $statement->bindParam(':id',$id, PDO::PARAM_INT);
+                $statement->execute();  
+    
+                //returns the # of affected rows (i.e. if a row is deleted)
+                $success = 0;
+                try{
+                    $statement = conn->prepare($query);
+                    $statement->execute($data);
+                    if ($statement->rowCount() > 0) {
+                        $results = 'successful';
+                    }
+                } catch (PDOException $e){
+                    echo "Error:". $e->getMessage();
+                }
+             
+                if ($results == 'successful') {
+                    echo " <div class='successful-delete>
+                        <p> Successfully updated product </p>                 
+                    </div>";
+                } else {
+                    echo "<div class='failed-delete>
+                        <p> Failed to update product. Product not found </p>                 
+                    </div>";
+                }
             }
             ?>
         </div>
