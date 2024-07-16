@@ -19,7 +19,7 @@
         <form action="" method="post">
             <input type="text" name="username" placeholder="Username" />
             <input type="password" name="password" placeholder="Password" />
-            <input type="submit" value="Login" />
+            <input type="submit" name="Login" value="Login" />
         </form>
     </div>
 
@@ -30,8 +30,8 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         //check if username and password are valid
-        if ($password != "password" || $username != "username") { //**change this to whatever our DB username and password is**
-            exit('Login failed. Incorrect username or password.');
+        if ($password != "K7~wuT}E" || $username != "root") { //**change this to whatever our DB username and password is**
+            exit("<p class='login-error'>Login failed. Incorrect username or password.</p>");
         };
         //successful login, set session variable
         session_start();
@@ -50,8 +50,9 @@
             echo "Connection successful.";
         } catch (PDOException $e) {
             error_log($e->getMessage());
-            echo $e->getMessage();
-            exit('Failed to connect to the database. Please contact the administrator.');
+            $error_msg = $e->getMessage();
+            echo "<br><p class='login-error'>$error_msg</p>";
+            exit("<p class='login-error'>Failed to connect to the database. Please contact the administrator.</p>");
         }
         //redirect user to dashboard
         header("location: ../pages/dashboard.php?status=loggedIn");

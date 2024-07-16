@@ -68,9 +68,14 @@ input[type="submit"] {
   background: #82b36672;
   cursor: pointer;
   transition: 0.3s;
-  color: red;
+  color: #ffffff;
 }
 
 input[type="submit"]:hover {
   background: #82b366ae;
+}
+
+.login-error {
+  color: red;
+  font-size: 1.2rem;
 }
