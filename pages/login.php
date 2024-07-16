@@ -25,7 +25,7 @@
 
 
     <?php
-    if (isset($_POST["Login"])) { //user has clicked the login button
+    if (isset($_POST["submit"])) { //user has clicked the login button
         //get user input
         $username = $_POST['username'];
         $password = $_POST['password'];
