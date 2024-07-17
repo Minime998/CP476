@@ -12,11 +12,3 @@ inputElements.forEach((element) => {
     }
   });
 });
-
-// Show query resutls message when use clicks submit button
-// document.querySelector(".submit-btn").addEventListener("click", (e) => {
-//   const MessageContainer = document.querySelector(".query-results");
-//   setTimeout(function () {
-//     MessageContainer.style.display = "block";
-//   }, 100);
-// });
