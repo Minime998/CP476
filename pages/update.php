@@ -15,18 +15,17 @@
         <div class="form-container">
             <h2>Update Product</h2>
             <form action="" method='post' class="form update-form">
-                <input type="text" class="input-field" name="item_ID" placeholder="Item ID" required numeric />
+                <input type="number" class="input-field" name="item_ID" placeholder="Item ID" required />
                 <input type="text" class="input-field" name="product_name" placeholder="Product Name" required />
-                <input type="text" class="input-field" name="quantity" placeholder="Quantity" required />
-                <input type="text" class="input-field" name="price" placeholder="Price" required />
+                <input type="number" class="input-field" name="quantity" placeholder="Quantity" required />
+                <input type="number" class="input-field" name="price" placeholder="Price" required step="0.01" />
                 <input type="text" class="input-field" name="status" placeholder="Status" required />
-                <input type="submit" class="submit-btn" name="submit" value="Update" required />
+                <input type="submit" class="submit-btn" name="submit" value="Update" />
             </form>
         </div>
         <div class="query-results">
             <h3>Messages:</h3>
             <?php
-            # put all the php logic here for updating a product
             session_start();
             $conn = null;
             if (isset($_SESSION['db_host'], $_SESSION['db_user'], $_SESSION['db_pass'], $_SESSION['db_name'])) {
@@ -35,9 +34,7 @@
                 $password = $_SESSION['db_pass'];
                 try {
                     $conn = new PDO($dsn, $username, $password);
-                    //turn on error exceptions
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    // echo "Connection successful.";
                 } catch (PDOException $e) {
                     error_log($e->getMessage());
                     $error_msg = $e->getMessage();
@@ -45,49 +42,38 @@
                     exit("<p class='connection-error'>Failed to connect to the database. Please contact the administrator.</p>");
                 }
             } else {
-                // in case the database connection parameter were not store in a session redirect user back to login page
-                echo "Database connection parameter are not set in the session";
-                header("location: ../pages/login.php?error=sessin_error");
+                echo "Database connection parameters are not set in the session";
+                header("location: ../pages/login.php?error=session_error");
             }
-            if (isset($_POST["submit"])) { //executes if user hits update button
+            if (isset($_POST["submit"])) {
                 $id = $_POST["item_ID"];
                 $product_name = $_POST["product_name"];
                 $quantity = $_POST["quantity"];
                 $price = $_POST["price"];
                 $status = $_POST["status"];
-                $query = "UPDATE product SET ";
-
-                //reused from delete, TO BE EDITED
-                $statement = $conn->prepare($query);
-                $statement->bindParam(':id', $id, PDO::PARAM_INT);
-                $statement->execute();
-
-                //returns the # of affected rows (i.e. if a row is deleted)
-                $success = 0;
+                
+                $query = "UPDATE product SET product_name = :product_name, quantity = :quantity, price = :price, status = :status WHERE item_ID = :id";
+                
                 try {
                     $statement = $conn->prepare($query);
-                    $statement->execute($data);
+                    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+                    $statement->bindParam(':product_name', $product_name, PDO::PARAM_STR);
+                    $statement->bindParam(':quantity', $quantity, PDO::PARAM_INT);
+                    $statement->bindParam(':price', $price, PDO::PARAM_STR);
+                    $statement->bindParam(':status', $status, PDO::PARAM_STR);
+                    $statement->execute();
+
                     if ($statement->rowCount() > 0) {
-                        $results = 'successful';
+                        echo "<div class='successful-update'><p>Successfully updated product</p></div>";
+                    } else {
+                        echo "<div class='failed-update'><p>Failed to update product. Product not found</p></div>";
                     }
                 } catch (PDOException $e) {
-                    echo "Something went wrong";
-                    echo "Error:" . $e->getMessage();
-                }
-
-                if ($results == 'successful-query') {
-                    echo " <div class='successful-delete>
-                        <p> Successfully updated product </p>                 
-                    </div>";
-                } else {
-                    echo "<div class='failed-query>
-                        <p> Failed to update product. Product not found </p>                 
-                    </div>";
+                    echo "<div class='failed-update'><p>Something went wrong. Error: " . $e->getMessage() . "</p></div>";
                 }
             }
             ?>
         </div>
-
     </div>
     <script src="../js/delete.js"></script>
 </body>
