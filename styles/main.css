@@ -60,6 +60,7 @@ form {
 }
 
 input[type="text"],
+input[type="number"],
 input[type="submit"],
 .failed-query,
 .successful-query {

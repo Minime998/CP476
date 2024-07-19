@@ -15,11 +15,11 @@
         <div class="form-container">
             <h2>Update Product</h2>
             <form action="" method='post' class="form update-form">
-                <input type="number" class="input-field" name="item_ID" placeholder="Item ID" required />
+                <input type="number" class="input-field" name="item_ID" placeholder="Item ID" required min="1" />
                 <input type="text" class="input-field" name="product_name" placeholder="Product Name" required />
-                <input type="number" class="input-field" name="quantity" placeholder="Quantity" required />
-                <input type="number" class="input-field" name="price" placeholder="Price" required step="0.01" />
-                <input type="text" class="input-field" name="status" placeholder="Status" required />
+                <input type="number" class="input-field" name="quantity" placeholder="Quantity" required min="0" />
+                <input type="number" class="input-field" name="price" placeholder="Price" required step="0.01" min="0" />
+                <input type="text" class="input-field" name="status" placeholder="Status" required maxlength="1" />
                 <input type="submit" class="submit-btn" name="submit" value="Update" />
             </form>
         </div>
@@ -51,9 +51,9 @@
                 $quantity = $_POST["quantity"];
                 $price = $_POST["price"];
                 $status = $_POST["status"];
-                
-                $query = "UPDATE product SET product_name = :product_name, quantity = :quantity, price = :price, status = :status WHERE item_ID = :id";
-                
+
+                $query = "UPDATE inventory SET product_name = :product_name, quantity = :quantity, price = :price, status = :status WHERE item_ID = :id";
+
                 try {
                     $statement = $conn->prepare($query);
                     $statement->bindParam(':id', $id, PDO::PARAM_INT);
@@ -64,9 +64,9 @@
                     $statement->execute();
 
                     if ($statement->rowCount() > 0) {
-                        echo "<div class='successful-update'><p>Successfully updated product</p></div>";
+                        echo "<div class='successful-query'><p>Successfully updated product</p></div>";
                     } else {
-                        echo "<div class='failed-update'><p>Failed to update product. Product not found</p></div>";
+                        echo "<div class='failed-query'><p>Failed to update product. Product not found</p></div>";
                     }
                 } catch (PDOException $e) {
                     echo "<div class='failed-update'><p>Something went wrong. Error: " . $e->getMessage() . "</p></div>";

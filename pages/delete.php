@@ -15,7 +15,7 @@
         <div class="form-container">
             <h2>Delete Product</h2>
             <form action="" method='post' class="form">
-                <input type="text" class="input-field" name="item_ID" placeholder="Item ID" required />
+                <input type="number" class="input-field" name="item_ID" placeholder="Item ID" required min="1" />
                 <input type="submit" class="submit-btn" name="submit" value="Delete" />
             </form>
         </div>
@@ -51,24 +51,29 @@
             if (isset($_POST["submit"])) { //executes if user hits delete button
                 $id = $_POST["item_ID"];
                 $query = "DELETE FROM inventory where Item_ID= :id";
-                $statement = $conn->prepare($query);
-                $statement->bindParam(':id', $id, PDO::PARAM_INT);
-                $statement->execute();
 
-                //returns the # of affected rows (i.e. if a row is deleted)
-                $results = 'failed';
-                if ($statement->rowCount() >= 1) {
-                    $results = 'successful';
-                }
+                try {
+                    $statement = $conn->prepare($query);
+                    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+                    $statement->execute();
 
-                if ($results == 'successful') {
-                    echo " <div class='successful-query'>
-                        <p> Successfully deleted product </p>                 
-                    </div>";
-                } else {
-                    echo "<div class='failed-query'>
-                        <p> Failed to delete product. Product not found </p>                 
+                    //returns the # of affected rows (i.e. if a row is deleted)
+                    $results = 'failed';
+                    if ($statement->rowCount() >= 1) {
+                        $results = 'successful';
+                    }
+
+                    if ($results == 'successful') {
+                        echo " <div class='successful-query'>
+                            <p> Successfully deleted product </p>                 
                         </div>";
+                    } else {
+                        echo "<div class='failed-query'>
+                            <p> Failed to delete product. Product not found </p>                 
+                            </div>";
+                    }
+                } catch (PDOException $e) {
+                    echo "<div class='failed-update'><p>Something went wrong. Error: " . $e->getMessage() . "</p></div>";
                 }
             }
             ?>
