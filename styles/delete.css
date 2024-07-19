@@ -1,8 +1,6 @@
 .form-container {
   background: #dae8fc;
   padding: 1rem;
-  color: #000000;
-  min-width: 600px;
 }
 
 form {
@@ -10,14 +8,13 @@ form {
   gap: 1rem;
 }
 
-input[type="text"],
+input[type="number"],
 .form-container {
   border: 2px solid #6c8ebf;
   border-radius: 7px;
 }
 
-input[type="text"],
-input[type="submit"],
+input[type="number"],
 input[type="submit"],
 .failed-query,
 .successful-query {
@@ -26,8 +23,7 @@ input[type="submit"],
   width: 100%;
 }
 
-input[type="submit"],
-.failed-query {
+input[type="submit"] {
   background: #ffcccc;
   border: 2px solid #f19c99;
 }
