@@ -51,9 +51,9 @@
                 $quantity = $_POST["quantity"];
                 $price = $_POST["price"];
                 $status = $_POST["status"];
-                
-                $query = "UPDATE product SET product_name = :product_name, quantity = :quantity, price = :price, status = :status WHERE item_ID = :id";
-                
+
+                $query = "UPDATE inventory SET product_name = :product_name, quantity = :quantity, price = :price, status = :status WHERE item_ID = :id";
+
                 try {
                     $statement = $conn->prepare($query);
                     $statement->bindParam(':id', $id, PDO::PARAM_INT);
